@@ -1,0 +1,79 @@
+---
+title: "Eating Outfixed"
+author: "ediaz16"
+output: 
+  html_document:
+    number_sections: true
+    toc: true
+    toc_depth: 5
+date: "`r Sys.Date()`"    
+    
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Who dines out more often?
+There were two years in which the General Social Survey asked about the frequency of eating out. We look at one of them.
+
+The variable name of interest is "eatout."  The URL is https://gss.norc.org/ In GSS data explorer look for "eatout." 
+
+## Find those years 
+For the first year the question was asked (1996) we have data. Your assignment is to analyze the GSS yearly data for 1996 and write a statistical report that answers the question.  The data are in the Files section.   
+
+## introduction
+$H_0$ There is no difference among the various races with regard to frequency of eating out  
+$H_A$ There is a statistical difference between at least two races with rgard to the frequency of eating out  
+
+
+```{r include=FALSE,echo=FALSE}
+source(file="fisherXY.R")
+require(tidyverse)
+require(tigerstats)
+require(knitr)
+library(dplyr)
+
+#require(haven)
+```
+
+null and alternative hypotheses
+
+```{r}
+GSS = read.csv('GSS1996.csv')
+GSS$race = as.factor(GSS$race)
+GSS$eatout = as.factor(GSS$eatout)
+GSS$race = case_match(GSS$race, '1'~'white', '2'~'black', '3'~"other")
+GSS$eatout = case_match(GSS$eatout, '1'~'yes', '2' ~ 'no')
+
+```
+
+
+## Methods
+
+ 
+
+ 
+
+## Descriptive results
+
+```{r}
+barchartGC(~race + eatout, type = 'percent', data=GSS)
+```
+
+ 
+
+## infrential results  
+### Chi-squared test results  
+
+
+### fisherXY test results
+
+```{r}
+fisherXY(GSS$eatout, GSS$race, printAll=T)
+```
+
+
+## Summary and Conclusions
+
+ 
